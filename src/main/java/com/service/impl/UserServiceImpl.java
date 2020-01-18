@@ -4,7 +4,7 @@ import com.entity.User;
 import com.service.UserService;
 
 /**
- * test
+ * test git 冲突
  * @author wangjinrong
  *
  */
