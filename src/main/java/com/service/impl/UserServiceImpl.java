@@ -2,6 +2,12 @@ package com.service.impl;
 
 import com.entity.User;
 import com.service.UserService;
+
+/**
+ * test
+ * @author wangjinrong
+ *
+ */
 public class UserServiceImpl implements UserService{
 	@Override
 	public User getUserbyName(String name) {
