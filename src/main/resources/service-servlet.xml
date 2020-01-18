@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!-- 这个Bean映射了当URL是/userService时，处理器为userServiceInvoker -->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/userService">userServiceInvoker</prop>
+            </props>
+        </property>
+    </bean>
+     <!-- 这个Bean映射了当URL是/studentService时，处理器为studentServiceInvoker -->
+      <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+         <property name="mappings">
+            <props>
+                <prop key="/studentService">studentServiceInvoker</prop>
+            </props>
+        </property>
+    </bean>
+ 
+ 
+    <!-- Announce that this interface is a HTTP invoker service. -->
+    <!-- 服务端暴露UserService服务接口 -->
+    <bean id="userServiceInvoker" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="userServiceImpl" />
+        <property name="serviceInterface" value="com.service.UserService" />
+    </bean>
+    <bean id="userServiceImpl" class="com.service.impl.UserServiceImpl" />
+    
+     <!-- 服务端暴露UserService服务接口 --> 
+    <bean id="studentServiceInvoker" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="studentServiceImpl" />
+        <property name="serviceInterface" value="com.service.StudentService" />
+    </bean>
+    <bean id="studentServiceImpl" class="com.service.impl.StudentServiceImpl" />
+</beans>
